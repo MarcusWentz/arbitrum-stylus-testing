@@ -13,7 +13,7 @@ Install your devnode
 git clone https://github.com/OffchainLabs/nitro-devnode.git
 cd nitro-devnode
 ```
-Modify the Docker file in folder `???` to be
+Modify the Docker file in folder `stylus-dev` to be
 ```
 ARG NITRO_NODE_VERSION=v3.6.4-28199cd
 FROM offchainlabs/nitro-node:$NITRO_NODE_VERSION AS nitro-node-stylus-dev
@@ -47,6 +47,10 @@ cargo stylus check
 ```
 
 ## Deploy
+
+Note: there is a GitHub issue open for the Nitro node causing this command to fail:
+
+https://github.com/OffchainLabs/nitro-devnode/issues/15
 
 ```shell
 cargo stylus deploy \
