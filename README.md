@@ -6,6 +6,8 @@ https://docs.arbitrum.io/stylus/quickstart
 
 ## Setup Nitro Node For Compilation
 
+Note: make sure you have docker installed before running the Nitro Node.
+
 Install your devnode
 ```
 git clone https://github.com/OffchainLabs/nitro-devnode.git
@@ -26,6 +28,6 @@ cargo stylus check
 
 ```
 cargo stylus deploy \
---endpoint=$STYLUS_RPC_URL \
+--endpoint=$arbitrumSepoliaHTTPS \
 --private-key=$devTestnetPrivateKey
 ``` 
