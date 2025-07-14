@@ -22,7 +22,7 @@ Launch your devnode
 ./run-dev-node.sh
 ```
 
-Note: the Docker file foor the Nitro node is located in folder `stylus-dev` for reference. 
+Note: the Docker file for the Nitro node is located in folder `stylus-dev` for reference. 
 
 ## Compile
 
