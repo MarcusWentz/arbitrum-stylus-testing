@@ -13,10 +13,6 @@ Install your devnode
 git clone https://github.com/OffchainLabs/nitro-devnode.git
 cd nitro-devnode
 ```
-Use the Docker file to build the image for your platform
-```shell
-docker build --platform linux/arm64 stylus-dev
-```
 Launch your devnode
 ```shell
 ./run-dev-node.sh
