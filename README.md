@@ -28,13 +28,13 @@ cargo stylus check
 
 ## Deploy
 
-Note: there is a GitHub issue open for the Nitro node causing this command to fail:
-
-https://github.com/OffchainLabs/nitro-devnode/issues/15
-
 ```shell
 cargo stylus deploy \
 --endpoint=$arbitrumSepoliaHTTPS \
 --private-key=$devTestnetPrivateKey \
 --no-verify
 ``` 
+
+Note: `cargo stylus deploy` uses flag `--no-verify` to skip using Docker for reproducible builds to avoid this error:
+
+https://github.com/OffchainLabs/nitro-devnode/issues/15
