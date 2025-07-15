@@ -35,5 +35,6 @@ https://github.com/OffchainLabs/nitro-devnode/issues/15
 ```shell
 cargo stylus deploy \
 --endpoint=$arbitrumSepoliaHTTPS \
---private-key=$devTestnetPrivateKey
+--private-key=$devTestnetPrivateKey \
+--no-verify
 ``` 
