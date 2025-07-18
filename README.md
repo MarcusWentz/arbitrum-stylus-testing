@@ -38,3 +38,13 @@ cargo stylus deploy \
 Note: `cargo stylus deploy` uses flag `--no-verify` to skip using Docker for reproducible builds to avoid this error:
 
 https://github.com/OffchainLabs/nitro-devnode/issues/15
+
+## Verify Rust contract WASM binary on Etherscan
+
+Guide:
+
+https://docs.arbitrum.io/stylus/how-tos/verifying-contracts-arbiscan
+
+Rust contract to compare compiled WASM binary with:
+
+https://github.com/MarcusWentz/arbitrum-stylus-testing/blob/main/src/lib.rs
