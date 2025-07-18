@@ -48,3 +48,12 @@ https://docs.arbitrum.io/stylus/how-tos/verifying-contracts-arbiscan
 Rust contract to compare compiled WASM binary with:
 
 https://github.com/MarcusWentz/arbitrum-stylus-testing/blob/main/src/lib.rs
+
+## Test Rust WASM contract with ethers.js
+
+Read and write to the Rust contract Solidity ABI interface:
+
+```shell
+cd javascript
+node testRustContract.js
+```

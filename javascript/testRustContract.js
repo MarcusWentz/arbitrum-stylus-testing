@@ -14,20 +14,16 @@ const signer = new ethers.Wallet(Buffer.from(process.env.devTestnetPrivateKey, '
 // Contract to generate ABI from to interact with Rust contract:
 // // SPDX-License-Identifier: MIT
 // pragma solidity 0.8.30;
-
+//
 // contract Counter {
 //     uint256 public number;
 //     function setNumber(uint256 newNumber) public {
 //         number = newNumber;
 //     }
-//     function increment() public {
-//         number++;
-//     }
 // }
 
-const contractAddress = '0x0bf7e79ae0d1a7f6bbf47f272d9fc572c9f1d957'
-const contractABI = [{"inputs":[],"name":"increment","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"number","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"newNumber","type":"uint256"}],"name":"setNumber","outputs":[],"stateMutability":"nonpayable","type":"function"}]
-
+const contractAddress = '0xd49d79d476215bef1e5ac43c46ec9db6e7906dbd'
+const contractABI = [{"inputs":[],"name":"number","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"newNumber","type":"uint256"}],"name":"setNumber","outputs":[],"stateMutability":"nonpayable","type":"function"}]
 // const contractDeployed = new web3.eth.Contract(contractABI, contractAddress)
 
 const contractDeployed = new ethers.Contract(contractAddress, contractABI, signer);
