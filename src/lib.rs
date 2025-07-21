@@ -1,16 +1,17 @@
 //!
 //! Stylus Hello World
 //!
-//! The following contract implements the Counter example from Foundry.
+//! The following contract implements the Counter example from Foundry (Solidity interface to call with ethers.js)
 //!
-//! ```solidity
-//! contract Counter {
-//!     uint256 public number;
-//!     function setNumber(uint256 newNumber) public {
-//!         number = newNumber;
-//!     }
-//! }
-//! ```
+// Contract to generate ABI from to interact with Rust contract:
+// // SPDX-License-Identifier: MIT
+// pragma solidity 0.8.30;
+//
+// interface Counter {
+//     function number() external view returns (uint256);
+//     function setNumber(uint256 newNumber) external;
+//     function sqrt() external view returns (uint256);
+// }
 //!
 //! The program is ABI-equivalent with Solidity, which means you can call it from both Solidity and Rust.
 //! To do this, run `cargo stylus export-abi`.
@@ -51,12 +52,25 @@ impl Counter {
         self.number.set(new_number);
     }
 
-    /// Sets a number in storage to a user-specified value.
-    pub fn div(&mut self, input: U256) -> U256 {
-        let number = self.number.get();
-        let output = number / input;
-        self.number.set(output);
-        return output;
+    // /// Sets a number in storage to a user-specified value.
+    // pub fn div(&mut self, input: U256) -> U256 {
+    //     let number = self.number.get();
+    //     let output = number / input;
+    //     self.number.set(output);
+    //     return output;
+    // }
+
+
+    /// Memory calculate a number in storage to a user-specified value.
+    //  pub fn sqrt(&mut self, input: U256) -> U256 {
+    /// Memory calculate a number in storage to a user-specified value.
+    pub fn sqrt() -> U256 {
+        // let number = self.number.get();
+        let a : f64 = 4.0;
+        let output = a.sqrt();
+        // // Storage update which requires input argument "&self" to be "&mut self" to make the variable mutable.
+        // self.number.set(U256::from(output));
+        return U256::from(output);
     }
 
     // /// Sets a number in storage to a user-specified value.

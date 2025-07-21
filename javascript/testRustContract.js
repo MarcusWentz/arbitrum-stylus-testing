@@ -15,15 +15,14 @@ const signer = new ethers.Wallet(Buffer.from(process.env.devTestnetPrivateKey, '
 // // SPDX-License-Identifier: MIT
 // pragma solidity 0.8.30;
 //
-// contract Counter {
-//     uint256 public number;
-//     function setNumber(uint256 newNumber) public {
-//         number = newNumber;
-//     }
+// interface Counter {
+//     function number() external view returns (uint256);
+//     function setNumber(uint256 newNumber) external;
+//     function sqrt() external view returns (uint256);
 // }
 
-const contractAddress = '0xd49d79d476215bef1e5ac43c46ec9db6e7906dbd'
-const contractABI = [{"inputs":[],"name":"number","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"newNumber","type":"uint256"}],"name":"setNumber","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+const contractAddress = '0xd810284b98f41681477d89888ce81f1b63690568'
+const contractABI = [{"inputs":[],"name":"number","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"newNumber","type":"uint256"}],"name":"setNumber","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"sqrt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
 // const contractDeployed = new web3.eth.Contract(contractABI, contractAddress)
 
 const contractDeployed = new ethers.Contract(contractAddress, contractABI, signer);
@@ -35,6 +34,8 @@ createAndSendTx()
 async function getStoredData() {  
   const storedData = await contractDeployed.number()
   console.log("storedData: "+ storedData)
+  const squareRoot = await contractDeployed.sqrt()
+  console.log("squareRoot: "+ squareRoot)
 }
 
 async function createAndSendTx() {
