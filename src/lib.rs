@@ -51,6 +51,14 @@ impl Counter {
         self.number.set(new_number);
     }
 
+    /// Sets a number in storage to a user-specified value.
+    pub fn div(&mut self, input: U256) -> U256 {
+        let number = self.number.get();
+        let output = number / input;
+        self.number.set(output);
+        return output;
+    }
+
     // /// Sets a number in storage to a user-specified value.
     // pub fn mul_number(&mut self, new_number: U256) {
     //     self.number.set(new_number * self.number.get());
