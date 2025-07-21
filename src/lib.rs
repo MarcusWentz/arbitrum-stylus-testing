@@ -66,8 +66,8 @@ impl Counter {
     /// Memory calculate a number in storage to a user-specified value.
     pub fn sqrt() -> U256 {
         // let number = self.number.get();
-        let a : f64 = 4.0;
-        let output = a.sqrt();
+        let input : f64 = 4.0;
+        let output = input.sqrt();
         // // Storage update which requires input argument "&self" to be "&mut self" to make the variable mutable.
         // self.number.set(U256::from(output));
         return U256::from(output);
