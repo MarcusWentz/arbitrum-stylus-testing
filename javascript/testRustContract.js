@@ -19,10 +19,11 @@ const signer = new ethers.Wallet(Buffer.from(process.env.devTestnetPrivateKey, '
 //     function number() external view returns (uint256);
 //     function setNumber(uint256 newNumber) external;
 //     function sqrt() external view returns (uint256);
+//     function ln() external view returns (uint256);
 // }
 
-const contractAddress = '0xd810284b98f41681477d89888ce81f1b63690568'
-const contractABI = [{"inputs":[],"name":"number","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"newNumber","type":"uint256"}],"name":"setNumber","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"sqrt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
+const contractAddress = '0x7180330d86b0af5651bff0d6537e51c93868fe51'
+const contractABI = [{"inputs":[],"name":"ln","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"number","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"newNumber","type":"uint256"}],"name":"setNumber","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"sqrt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
 // const contractDeployed = new web3.eth.Contract(contractABI, contractAddress)
 
 const contractDeployed = new ethers.Contract(contractAddress, contractABI, signer);
@@ -36,6 +37,8 @@ async function getStoredData() {
   console.log("storedData: "+ storedData)
   const squareRoot = await contractDeployed.sqrt()
   console.log("squareRoot: "+ squareRoot)
+  const ln = await contractDeployed.ln()
+  console.log("ln: "+ ln)
 }
 
 async function createAndSendTx() {
@@ -45,47 +48,47 @@ async function createAndSendTx() {
   console.log("chainIdConnected: "+ chainIdConnected)
 
   if(chainIdConnected != arbitrum_sepolia_chain_id){
-    console.log("RPC endpoint not connected to Base Sepolia (chainId: " + arbitrum_sepolia_chain_id + ").");
-    console.log("Switch to Base Sepolia then try again.");
+    console.log("RPC endpoint not connected to Arbitrum Sepolia (chainId: " + arbitrum_sepolia_chain_id + ").");
+    console.log("Switch to Arbitrum Sepolia then try again.");
     return;
   }
 
   await getStoredData();
 
-  const unixTime = Date.now();
+  // const unixTime = Date.now();
 
-  console.log("CURRENT UNIX TIME: " + unixTime);
+  // console.log("CURRENT UNIX TIME: " + unixTime);
 
-  //Simple contract transaction.
-  const txSigned = await contractDeployed.setNumber(unixTime); //Will compute the gas limit opcodes automatically and get the oracle gas price per gas unit.
+  // //Simple contract transaction.
+  // const txSigned = await contractDeployed.setNumber(unixTime); //Will compute the gas limit opcodes automatically and get the oracle gas price per gas unit.
 
-  //Tune transaction with custom arguments: https://github.com/ethers-io/ethers.js/issues/40#issuecomment-841749793.
-  // const txSigned = await contractDeployed.
-  //   set(
-  //     unixTime,
-  //   {
-  //    value: 0,                                          
-  //    gasPrice: ethers.utils.parseUnits('200', 'gwei'),  
-  //   }
-  // );
+  // //Tune transaction with custom arguments: https://github.com/ethers-io/ethers.js/issues/40#issuecomment-841749793.
+  // // const txSigned = await contractDeployed.
+  // //   set(
+  // //     unixTime,
+  // //   {
+  // //    value: 0,                                          
+  // //    gasPrice: ethers.utils.parseUnits('200', 'gwei'),  
+  // //   }
+  // // );
 
-  // Raw transaction (harder to use since the contract calls will automatically calculate the gas limit for you.)
+  // // Raw transaction (harder to use since the contract calls will automatically calculate the gas limit for you.)
 
-  // const txCount = await provider.getTransactionCount(signer.address); 
+  // // const txCount = await provider.getTransactionCount(signer.address); 
 
-  // const callDataObject = await contractDeployed.populateTransaction.set(unixTIme);
-  // const txData = callDataObject.data;
+  // // const callDataObject = await contractDeployed.populateTransaction.set(unixTIme);
+  // // const txData = callDataObject.data;
 
-  // const txSigned = await signer.sendTransaction({
-  //   chainId: chainIdConnected,
-  //   to: contractAddress,
-  //   nonce:    txCount,
-  //   gasLimit: ethers.utils.hexlify(210000), // Raise the gas limit to a much higher amount
-  //   gasPrice: ethers.utils.hexlify(10000000000),
-  //   data: txData
-  // });
+  // // const txSigned = await signer.sendTransaction({
+  // //   chainId: chainIdConnected,
+  // //   to: contractAddress,
+  // //   nonce:    txCount,
+  // //   gasLimit: ethers.utils.hexlify(210000), // Raise the gas limit to a much higher amount
+  // //   gasPrice: ethers.utils.hexlify(10000000000),
+  // //   data: txData
+  // // });
 
-  console.log("Tx submitted: " + txSigned.hash)
+  // console.log("Tx submitted: " + txSigned.hash)
 
 }
 
