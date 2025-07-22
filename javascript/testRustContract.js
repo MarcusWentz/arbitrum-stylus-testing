@@ -21,10 +21,11 @@ const signer = new ethers.Wallet(Buffer.from(process.env.devTestnetPrivateKey, '
 //     function sqrt() external view returns (uint256);
 //     function ln() external view returns (uint256);
 //     function log10() external view returns (uint256);
+//     function log2() external view returns (uint256);
 // }
 
-const contractAddress = '0xa66cc96316a4df10b96dc3e62dae184d04e93ad9'
-const contractABI = [{"inputs":[],"name":"ln","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"log10","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"number","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"newNumber","type":"uint256"}],"name":"setNumber","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"sqrt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
+const contractAddress = '0x882725b73c2eef6184dd608eac0b1dece5548318'
+const contractABI = [{"inputs":[],"name":"ln","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"log10","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"log2","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"number","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"newNumber","type":"uint256"}],"name":"setNumber","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"sqrt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
 // const contractDeployed = new web3.eth.Contract(contractABI, contractAddress)
 
 const contractDeployed = new ethers.Contract(contractAddress, contractABI, signer);
@@ -42,6 +43,8 @@ async function getStoredData() {
   console.log("ln: "+ ln)
   const log10 = await contractDeployed.log10()
   console.log("log10: "+ log10)
+  const log2 = await contractDeployed.log2()
+  console.log("log2: "+ log2)
 }
 
 async function createAndSendTx() {

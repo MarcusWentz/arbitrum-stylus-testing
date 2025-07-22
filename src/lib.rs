@@ -13,6 +13,7 @@
 //     function sqrt() external view returns (uint256);
 //     function ln() external view returns (uint256);
 //     function log10() external view returns (uint256);
+//     function log2() external view returns (uint256);
 // }
 //!
 //! The program is ABI-equivalent with Solidity, which means you can call it from both Solidity and Rust.
@@ -81,6 +82,16 @@ impl Counter {
         // let number = self.number.get();
         let input : f64 = 100.0;
         let output = input.log10();
+        // // Storage update which requires input argument "&self" to be "&mut self" to make the variable mutable.
+        // self.number.set(U256::from(output));
+        return U256::from(output);
+    }
+
+    /// Memory calculate a number in storage to a user-specified value.
+    pub fn log2() -> U256 {
+        // let number = self.number.get();
+        let input : f64 = 100.0;
+        let output = input.log2();
         // // Storage update which requires input argument "&self" to be "&mut self" to make the variable mutable.
         // self.number.set(U256::from(output));
         return U256::from(output);
