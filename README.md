@@ -31,7 +31,7 @@ cargo stylus check
 ```shell
 cargo stylus deploy \
 --endpoint=$arbitrumSepoliaHTTPS \
---private-key=$devTestnetPrivateKey \
+--private-key=$PRIVATE_KEY \
 --no-verify
 ``` 
 
