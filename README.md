@@ -57,3 +57,34 @@ https://docs.arbitrum.io/stylus/how-tos/verifying-contracts-arbiscan
 Rust contract to compare compiled WASM binary with:
 
 https://github.com/MarcusWentz/arbitrum-stylus-testing/blob/main/src/lib.rs
+
+Etherscan API Stylus Verification:
+
+https://docs.etherscan.io/etherscan-v2/api-endpoints/contracts#verify-stylus-source-code
+
+### Verify after deployment
+
+```shell
+curl -X POST "https://api.etherscan.io/v2/api?chainid=421614&module=contract&action=verifysourcecode&apikey=${arbiscanApiKey}" \
+-d "codeformat=stylus" \
+-d "sourceCode=${GITHUB_PROJECT_URL_LINK}" \
+-d "contractaddress=${CONTRACT_ADDRESS}" \
+-d "contractname=${CONTRACT_NAME}" \
+-d "compilerversion=stylus:0.6.1" \
+-d "licenseType=3"
+```
+
+which should return a verification job ID to check verification status.
+
+### Check Verification Status
+
+The field `guid` should be the return job ID value from the verification job request.
+
+```shell
+curl "https://api.etherscan.io/v2/api?\
+chainid=421614&\
+module=contract&\
+action=checkverifystatus&\
+guid=zddsxmdisghjzbt9qstscfrb2yi1djgjmbjfmaqrmkns1grqak&\
+apikey=${arbiscanApiKey}"
+```
